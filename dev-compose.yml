@@ -1,0 +1,14 @@
+services:
+  thinkdepthai_deepresearch:
+    image: thinkdepthai_deepresearch
+    build:
+      context: .
+      target: development
+    command: /usr/sbin/sshd -D
+    ports:
+      - 22:22
+      - 8501:8501
+    volumes:
+      - ./src:/app/src
+      - ./app.py:/app/app.py
+      - ./.env:/app/.env
