@@ -1,8 +1,9 @@
 services:
-  thinkdepthai_deepresearch:
-    image: thinkdepthai_deepresearch
+  thinkdepthai_deepresearch_dev:
+    image: thinkdepthai_deepresearch_dev
     build:
       context: .
+      dockerfile: docker/Dockerfile
       target: development
     command: /usr/sbin/sshd -D
     ports:

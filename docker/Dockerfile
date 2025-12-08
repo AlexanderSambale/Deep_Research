@@ -23,9 +23,9 @@ FROM base AS development
 
 RUN apt-get update && apt-get install -y openssh-server unzip wget && rm -rf /var/lib/apt/lists/*
 
-COPY id_ed25519_development /etc/ssh/ssh_host_ed25519_key
-COPY id_ed25519_development.pub /etc/ssh/ssh_host_ed25519_key.pub
-COPY authorized_keys /root/.ssh/authorized_keys
+COPY docker/id_ed25519_development /etc/ssh/ssh_host_ed25519_key
+COPY docker/id_ed25519_development.pub /etc/ssh/ssh_host_ed25519_key.pub
+COPY docker/authorized_keys /root/.ssh/authorized_keys
 
 RUN mkdir -p /root/.vscodium-server/extensions && \
 # Download Python extension
