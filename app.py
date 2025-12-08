@@ -23,9 +23,6 @@ from src.utils import (
 )
 
 from tavily import TavilyClient
-import langchain
-
-langchain.debug = True
 
 # Ensure the `src` package is on the import path
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
