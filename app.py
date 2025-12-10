@@ -3,6 +3,7 @@ import sys
 import asyncio
 
 import streamlit as st
+import streamlit.components.v1 as components
 from dotenv import load_dotenv
 from langgraph.checkpoint.memory import InMemorySaver
 from langchain_core.messages import HumanMessage
@@ -150,6 +151,23 @@ if run_button:
     st.subheader("📄 Final Report")
     final_report = result.get("final_report", "")
     if final_report:
+        # Copy button for raw markdown
+        components.html(f'''
+        <div style="margin-bottom:10px;">
+            <button id="copyBtn">Copy Markdown</button>
+        </div>
+        <textarea id="mdContent" style="position:absolute; left:-9999px;">{final_report}</textarea>
+        <script>
+        const btn = document.getElementById('copyBtn');
+        btn.addEventListener('click', () => {{
+            const txt = document.getElementById('mdContent');
+            navigator.clipboard.writeText(txt.value).then(() => {{
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy Markdown', 2000);
+            }});
+        }});
+        </script>
+        ''', height=80)
         # The notebook used `rich.Markdown`; Streamlit can render Markdown directly.
         st.markdown(final_report)
     else:
