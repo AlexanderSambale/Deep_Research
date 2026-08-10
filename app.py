@@ -47,7 +47,7 @@ with st.sidebar:
             "individuals relate to each other."
         ),
     )
-    
+
     run_button = st.button("Run Research")
 
     st.header("Configuration")
@@ -55,25 +55,25 @@ with st.sidebar:
     model = st.text_input(
         "Model",
         value=os.getenv("MODEL", "qwen3-235b-a22b"),
-        help="Name of the language model to use."
+        help="Name of the language model to use.",
     )
     base_url = st.text_input(
         "Base URL",
         value=os.getenv("BASE_URL", "https://api.openai.com/v1/"),
-        help="Base URL for the model API. OpenAI compatible Endpoint."
+        help="Base URL for the model API. OpenAI compatible Endpoint.",
     )
     api_key = st.text_input(
         "API Key",
         type="password",
         value=os.getenv("API_KEY", ""),
-        help="API key for the model service."
+        help="API key for the model service.",
     )
 
     tavily_api_key = st.text_input(
         "Tavily API Key",
         type="password",
-        value=os.getenv("TAVILY_KEY", ""),
-        help="Tavily API key for the search service."
+        value=os.getenv("TAVILY_API_KEY", ""),
+        help="Tavily API key for the search service.",
     )
 
 # System constants (configurable via UI)
@@ -152,7 +152,8 @@ if run_button:
     final_report = result.get("final_report", "")
     if final_report:
         # Copy button for raw markdown
-        components.html(f'''
+        components.html(
+            f"""
         <div style="margin-bottom:10px;">
             <button id="copyBtn">Copy Markdown</button>
         </div>
@@ -167,7 +168,9 @@ if run_button:
             }});
         }});
         </script>
-        ''', height=80)
+        """,
+            height=80,
+        )
         # The notebook used `rich.Markdown`; Streamlit can render Markdown directly.
         st.markdown(final_report)
     else:
